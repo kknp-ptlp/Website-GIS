@@ -1,0 +1,1955 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/Control.OSMGeocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+		<title>Peta Proyeksi 7 Layanan Prioritas BPN</title>
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+		</style>
+	 <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #00796B;
+            color: black;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+        }
+        h2 {
+            color: #00796B;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            width: 70%;
+            border-radius: 8px;
+        }
+        .box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #00796B;
+            color: white;
+        }
+		footer img {
+            height: 10px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Peta Proyeksi 7 Layanan Prioritas Kantah Belu</h1>
+    </header>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/Control.OSMGeocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Belum_Terpetakan_1.js"></script>
+        <script src="data/Sudah_Terpetakan_2.js"></script>
+        <script src="data/Telah_Terpetakan_3.js"></script>
+        <script src="data/Belum_Terpetakan_4.js"></script>
+        <script src="data/Belum_Terpetekan_5.js"></script>
+        <script src="data/Sudah_Terpetakan_6.js"></script>
+        <script src="data/Telah_Terpetakan_7.js"></script>
+        <script src="data/Belum_Terpetakan_8.js"></script>
+        <script src="data/Sudah_Terpetakan_9.js"></script>
+        <script src="data/Belum_Terpetakan_10.js"></script>
+        <script src="data/Sudah_Terpetakan_11.js"></script>
+        <script src="data/Belum_Terpetakan_12.js"></script>
+        <script src="data/Sudah_Terpetakan_13.js"></script>
+        <script src="data/Sungai_14.js"></script>
+        <script src="data/JalanRDTR_15.js"></script>
+        <script src="data/GarisBatasDesa_16.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-9.10966521028,124.859389381],[-9.04460066155,124.960118941]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        var overlay_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0
+        });
+        overlay_OpenStreetMap_0.addTo(map);
+        map.addLayer(overlay_OpenStreetMap_0);
+        function pop_Belum_Terpetakan_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Belum_Terpetakan_1_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Belum_Terpetakan_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Belum_Terpetakan_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Belum_Terpetakan_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Belum_Terpetakan_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Belum_Terpetakan_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Belum_Terpetakan_1');
+        map.getPane('pane_Belum_Terpetakan_1').style.zIndex = 401;
+        map.getPane('pane_Belum_Terpetakan_1').style['mix-blend-mode'] = 'normal';
+        var layer_Belum_Terpetakan_1 = new L.geoJson(json_Belum_Terpetakan_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Belum_Terpetakan_1',
+            onEachFeature: pop_Belum_Terpetakan_1,
+            style: style_Belum_Terpetakan_1_0,
+        });
+        bounds_group.addLayer(layer_Belum_Terpetakan_1);
+        map.addLayer(layer_Belum_Terpetakan_1);
+        function pop_Sudah_Terpetakan_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sudah_Terpetakan_2_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Sudah_Terpetakan_2');
+        map.getPane('pane_Sudah_Terpetakan_2').style.zIndex = 402;
+        map.getPane('pane_Sudah_Terpetakan_2').style['mix-blend-mode'] = 'normal';
+        var layer_Sudah_Terpetakan_2 = new L.geoJson(json_Sudah_Terpetakan_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sudah_Terpetakan_2',
+            onEachFeature: pop_Sudah_Terpetakan_2,
+            style: style_Sudah_Terpetakan_2_0,
+        });
+        bounds_group.addLayer(layer_Sudah_Terpetakan_2);
+        map.addLayer(layer_Sudah_Terpetakan_2);
+        function pop_Telah_Terpetakan_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Telah_Terpetakan_3_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Telah_Terpetakan_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Telah_Terpetakan_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,164,135,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Telah_Terpetakan_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,54,42,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Telah_Terpetakan_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Telah_Terpetakan_3');
+        map.getPane('pane_Telah_Terpetakan_3').style.zIndex = 403;
+        map.getPane('pane_Telah_Terpetakan_3').style['mix-blend-mode'] = 'normal';
+        var layer_Telah_Terpetakan_3 = new L.geoJson(json_Telah_Terpetakan_3, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Telah_Terpetakan_3',
+            onEachFeature: pop_Telah_Terpetakan_3,
+            style: style_Telah_Terpetakan_3_0,
+        });
+        bounds_group.addLayer(layer_Telah_Terpetakan_3);
+        map.addLayer(layer_Telah_Terpetakan_3);
+        function pop_Belum_Terpetakan_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Belum_Terpetakan_4_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Belum_Terpetakan_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Belum_Terpetakan_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Belum_Terpetakan_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Belum_Terpetakan_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Belum_Terpetakan_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Belum_Terpetakan_4');
+        map.getPane('pane_Belum_Terpetakan_4').style.zIndex = 404;
+        map.getPane('pane_Belum_Terpetakan_4').style['mix-blend-mode'] = 'normal';
+        var layer_Belum_Terpetakan_4 = new L.geoJson(json_Belum_Terpetakan_4, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Belum_Terpetakan_4',
+            onEachFeature: pop_Belum_Terpetakan_4,
+            style: style_Belum_Terpetakan_4_0,
+        });
+        bounds_group.addLayer(layer_Belum_Terpetakan_4);
+        map.addLayer(layer_Belum_Terpetakan_4);
+        function pop_Belum_Terpetekan_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Belum_Terpetekan_5_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Belum_Terpetekan_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Belum_Terpetekan_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,164,135,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Belum_Terpetekan_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,54,42,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Belum_Terpetekan_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Belum_Terpetekan_5');
+        map.getPane('pane_Belum_Terpetekan_5').style.zIndex = 405;
+        map.getPane('pane_Belum_Terpetekan_5').style['mix-blend-mode'] = 'normal';
+        var layer_Belum_Terpetekan_5 = new L.geoJson(json_Belum_Terpetekan_5, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Belum_Terpetekan_5',
+            onEachFeature: pop_Belum_Terpetekan_5,
+            style: style_Belum_Terpetekan_5_0,
+        });
+        bounds_group.addLayer(layer_Belum_Terpetekan_5);
+        map.addLayer(layer_Belum_Terpetekan_5);
+        function pop_Sudah_Terpetakan_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sudah_Terpetakan_6_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Sudah_Terpetakan_6');
+        map.getPane('pane_Sudah_Terpetakan_6').style.zIndex = 406;
+        map.getPane('pane_Sudah_Terpetakan_6').style['mix-blend-mode'] = 'normal';
+        var layer_Sudah_Terpetakan_6 = new L.geoJson(json_Sudah_Terpetakan_6, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sudah_Terpetakan_6',
+            onEachFeature: pop_Sudah_Terpetakan_6,
+            style: style_Sudah_Terpetakan_6_0,
+        });
+        bounds_group.addLayer(layer_Sudah_Terpetakan_6);
+        map.addLayer(layer_Sudah_Terpetakan_6);
+        function pop_Telah_Terpetakan_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPEHAK</th>\
+                        <td>' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Telah_Terpetakan_7_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Telah_Terpetakan_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Telah_Terpetakan_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Telah_Terpetakan_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Telah_Terpetakan_7');
+        map.getPane('pane_Telah_Terpetakan_7').style.zIndex = 407;
+        map.getPane('pane_Telah_Terpetakan_7').style['mix-blend-mode'] = 'normal';
+        var layer_Telah_Terpetakan_7 = new L.geoJson(json_Telah_Terpetakan_7, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Telah_Terpetakan_7',
+            onEachFeature: pop_Telah_Terpetakan_7,
+            style: style_Telah_Terpetakan_7_0,
+        });
+        bounds_group.addLayer(layer_Telah_Terpetakan_7);
+        map.addLayer(layer_Telah_Terpetakan_7);
+        function pop_Belum_Terpetakan_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Belum_Terpetakan_8_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Belum_Terpetakan_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Belum_Terpetakan_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Belum_Terpetakan_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Belum_Terpetakan_8');
+        map.getPane('pane_Belum_Terpetakan_8').style.zIndex = 408;
+        map.getPane('pane_Belum_Terpetakan_8').style['mix-blend-mode'] = 'normal';
+        var layer_Belum_Terpetakan_8 = new L.geoJson(json_Belum_Terpetakan_8, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Belum_Terpetakan_8',
+            onEachFeature: pop_Belum_Terpetakan_8,
+            style: style_Belum_Terpetakan_8_0,
+        });
+        bounds_group.addLayer(layer_Belum_Terpetakan_8);
+        map.addLayer(layer_Belum_Terpetakan_8);
+        function pop_Sudah_Terpetakan_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sudah_Terpetakan_9_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Sudah_Terpetakan_9');
+        map.getPane('pane_Sudah_Terpetakan_9').style.zIndex = 409;
+        map.getPane('pane_Sudah_Terpetakan_9').style['mix-blend-mode'] = 'normal';
+        var layer_Sudah_Terpetakan_9 = new L.geoJson(json_Sudah_Terpetakan_9, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sudah_Terpetakan_9',
+            onEachFeature: pop_Sudah_Terpetakan_9,
+            style: style_Sudah_Terpetakan_9_0,
+        });
+        bounds_group.addLayer(layer_Sudah_Terpetakan_9);
+        map.addLayer(layer_Sudah_Terpetakan_9);
+        function pop_Belum_Terpetakan_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Belum_Terpetakan_10_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Belum_Terpetakan_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Belum_Terpetakan_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Belum_Terpetakan_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Belum_Terpetakan_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Belum_Terpetakan_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Belum_Terpetakan_10');
+        map.getPane('pane_Belum_Terpetakan_10').style.zIndex = 410;
+        map.getPane('pane_Belum_Terpetakan_10').style['mix-blend-mode'] = 'normal';
+        var layer_Belum_Terpetakan_10 = new L.geoJson(json_Belum_Terpetakan_10, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Belum_Terpetakan_10',
+            onEachFeature: pop_Belum_Terpetakan_10,
+            style: style_Belum_Terpetakan_10_0,
+        });
+        bounds_group.addLayer(layer_Belum_Terpetakan_10);
+        map.addLayer(layer_Belum_Terpetakan_10);
+        function pop_Sudah_Terpetakan_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sudah_Terpetakan_11_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_11',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_11',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_11',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_11',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_11',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Sudah_Terpetakan_11');
+        map.getPane('pane_Sudah_Terpetakan_11').style.zIndex = 411;
+        map.getPane('pane_Sudah_Terpetakan_11').style['mix-blend-mode'] = 'normal';
+        var layer_Sudah_Terpetakan_11 = new L.geoJson(json_Sudah_Terpetakan_11, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sudah_Terpetakan_11',
+            onEachFeature: pop_Sudah_Terpetakan_11,
+            style: style_Sudah_Terpetakan_11_0,
+        });
+        bounds_group.addLayer(layer_Sudah_Terpetakan_11);
+        map.addLayer(layer_Sudah_Terpetakan_11);
+        function pop_Belum_Terpetakan_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Belum_Terpetakan_12_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Belum_Terpetakan_12',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Belum_Terpetakan_12',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Belum_Terpetakan_12',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Belum_Terpetakan_12',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Belum_Terpetakan_12',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Belum_Terpetakan_12');
+        map.getPane('pane_Belum_Terpetakan_12').style.zIndex = 412;
+        map.getPane('pane_Belum_Terpetakan_12').style['mix-blend-mode'] = 'normal';
+        var layer_Belum_Terpetakan_12 = new L.geoJson(json_Belum_Terpetakan_12, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Belum_Terpetakan_12',
+            onEachFeature: pop_Belum_Terpetakan_12,
+            style: style_Belum_Terpetakan_12_0,
+        });
+        bounds_group.addLayer(layer_Belum_Terpetakan_12);
+        map.addLayer(layer_Belum_Terpetakan_12);
+        function pop_Sudah_Terpetakan_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>REMARK</strong><br />' + (feature.properties['REMARK'] !== null ? Autolinker.link(String(feature.properties['REMARK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? Autolinker.link(String(feature.properties['NAMOBJ'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? Autolinker.link(String(feature.properties['KECAMATAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KELURAHAN</strong><br />' + (feature.properties['KELURAHAN'] !== null ? Autolinker.link(String(feature.properties['KELURAHAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPEHAK</strong><br />' + (feature.properties['TIPEHAK'] !== null ? Autolinker.link(String(feature.properties['TIPEHAK'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TAHUN</strong><br />' + (feature.properties['TAHUN'] !== null ? Autolinker.link(String(feature.properties['TAHUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NIB</strong><br />' + (feature.properties['NIB'] !== null ? Autolinker.link(String(feature.properties['NIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASTERTUL</strong><br />' + (feature.properties['LUASTERTUL'] !== null ? Autolinker.link(String(feature.properties['LUASTERTUL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUASPETA</strong><br />' + (feature.properties['LUASPETA'] !== null ? Autolinker.link(String(feature.properties['LUASPETA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? Autolinker.link(String(feature.properties['Keterangan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SKORING</strong><br />' + (feature.properties['SKORING'] !== null ? Autolinker.link(String(feature.properties['SKORING'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sudah_Terpetakan_13_0(feature) {
+            switch(String(feature.properties['SKORING'])) {
+                case '1':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_13',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_13',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_13',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_13',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Sudah_Terpetakan_13',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Sudah_Terpetakan_13');
+        map.getPane('pane_Sudah_Terpetakan_13').style.zIndex = 413;
+        map.getPane('pane_Sudah_Terpetakan_13').style['mix-blend-mode'] = 'normal';
+        var layer_Sudah_Terpetakan_13 = new L.geoJson(json_Sudah_Terpetakan_13, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sudah_Terpetakan_13',
+            onEachFeature: pop_Sudah_Terpetakan_13,
+            style: style_Sudah_Terpetakan_13_0,
+        });
+        bounds_group.addLayer(layer_Sudah_Terpetakan_13);
+        map.addLayer(layer_Sudah_Terpetakan_13);
+        function pop_Sungai_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FNODE_'] !== null ? Autolinker.link(String(feature.properties['FNODE_'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TNODE_'] !== null ? Autolinker.link(String(feature.properties['TNODE_'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LPOLY_'] !== null ? Autolinker.link(String(feature.properties['LPOLY_'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RPOLY_'] !== null ? Autolinker.link(String(feature.properties['RPOLY_'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LENGTH'] !== null ? Autolinker.link(String(feature.properties['LENGTH'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PALIR_'] !== null ? Autolinker.link(String(feature.properties['PALIR_'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PALIR_ID'] !== null ? Autolinker.link(String(feature.properties['PALIR_ID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DXF_LAYER'] !== null ? Autolinker.link(String(feature.properties['DXF_LAYER'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DXF_COLOR'] !== null ? Autolinker.link(String(feature.properties['DXF_COLOR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DXF_THICKN'] !== null ? Autolinker.link(String(feature.properties['DXF_THICKN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DXF_TYPE'] !== null ? Autolinker.link(String(feature.properties['DXF_TYPE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DXF_ELEVAT'] !== null ? Autolinker.link(String(feature.properties['DXF_ELEVAT'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DXF_CURVE'] !== null ? Autolinker.link(String(feature.properties['DXF_CURVE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KODE_UNSUR'] !== null ? Autolinker.link(String(feature.properties['KODE_UNSUR'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sungai_14_0() {
+            return {
+                pane: 'pane_Sungai_14',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Sungai_14');
+        map.getPane('pane_Sungai_14').style.zIndex = 414;
+        map.getPane('pane_Sungai_14').style['mix-blend-mode'] = 'normal';
+        var layer_Sungai_14 = new L.geoJson(json_Sungai_14, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sungai_14',
+            onEachFeature: pop_Sungai_14,
+            style: style_Sungai_14_0,
+        });
+        bounds_group.addLayer(layer_Sungai_14);
+        function pop_JalanRDTR_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['JALAN'] !== null ? Autolinker.link(String(feature.properties['JALAN'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_JalanRDTR_15_0() {
+            return {
+                pane: 'pane_JalanRDTR_15',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_JalanRDTR_15');
+        map.getPane('pane_JalanRDTR_15').style.zIndex = 415;
+        map.getPane('pane_JalanRDTR_15').style['mix-blend-mode'] = 'normal';
+        var layer_JalanRDTR_15 = new L.geoJson(json_JalanRDTR_15, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_JalanRDTR_15',
+            onEachFeature: pop_JalanRDTR_15,
+            style: style_JalanRDTR_15_0,
+        });
+        bounds_group.addLayer(layer_JalanRDTR_15);
+        map.addLayer(layer_JalanRDTR_15);
+        function pop_GarisBatasDesa_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RIGHT_FID'] !== null ? Autolinker.link(String(feature.properties['RIGHT_FID'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GarisBatasDesa_16_0() {
+            return {
+                pane: 'pane_GarisBatasDesa_16',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_GarisBatasDesa_16');
+        map.getPane('pane_GarisBatasDesa_16').style.zIndex = 416;
+        map.getPane('pane_GarisBatasDesa_16').style['mix-blend-mode'] = 'normal';
+        var layer_GarisBatasDesa_16 = new L.geoJson(json_GarisBatasDesa_16, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_GarisBatasDesa_16',
+            onEachFeature: pop_GarisBatasDesa_16,
+            style: style_GarisBatasDesa_16_0,
+        });
+        bounds_group.addLayer(layer_GarisBatasDesa_16);
+        map.addLayer(layer_GarisBatasDesa_16);
+        var osmGeocoder = new L.Control.OSMGeocoder({
+            collapsed: false,
+            position: 'topright',
+            text: 'Search',
+        });
+        osmGeocoder.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/GarisBatasDesa_16.png" /> GarisBatasDesa': layer_GarisBatasDesa_16,'<img src="legend/JalanRDTR_15.png" /> JalanRDTR': layer_JalanRDTR_15,'<img src="legend/Sungai_14.png" /> Sungai': layer_Sungai_14,'Sudah_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_13_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_13_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_13_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_13_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_13_54.png" /></td><td>5</td></tr></table>': layer_Sudah_Terpetakan_13,'Belum_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_12_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_12_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_12_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_12_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_12_54.png" /></td><td>5</td></tr></table>': layer_Belum_Terpetakan_12,'Sudah_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_11_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_11_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_11_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_11_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_11_54.png" /></td><td>5</td></tr></table>': layer_Sudah_Terpetakan_11,'Belum_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_10_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_10_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_10_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_10_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_10_54.png" /></td><td>5</td></tr></table>': layer_Belum_Terpetakan_10,'Sudah_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_9_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_9_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_9_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_9_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_9_54.png" /></td><td>5</td></tr></table>': layer_Sudah_Terpetakan_9,'Belum_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_8_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_8_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_8_52.png" /></td><td>5</td></tr></table>': layer_Belum_Terpetakan_8,'Telah_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Telah_Terpetakan_7_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Telah_Terpetakan_7_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Telah_Terpetakan_7_52.png" /></td><td>5</td></tr></table>': layer_Telah_Terpetakan_7,'Sudah_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_6_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_6_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_6_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_6_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_6_54.png" /></td><td>5</td></tr></table>': layer_Sudah_Terpetakan_6,'Belum_Terpetekan<br /><table><tr><td style="text-align: center;"><img src="legend/Belum_Terpetekan_5_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetekan_5_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetekan_5_42.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetekan_5_53.png" /></td><td>5</td></tr></table>': layer_Belum_Terpetekan_5,'Belum_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_4_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_4_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_4_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_4_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_4_54.png" /></td><td>5</td></tr></table>': layer_Belum_Terpetakan_4,'Telah_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Telah_Terpetakan_3_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Telah_Terpetakan_3_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Telah_Terpetakan_3_42.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Telah_Terpetakan_3_53.png" /></td><td>5</td></tr></table>': layer_Telah_Terpetakan_3,'Sudah_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_2_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_2_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_2_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_2_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Sudah_Terpetakan_2_54.png" /></td><td>5</td></tr></table>': layer_Sudah_Terpetakan_2,'Belum_Terpetakan<br /><table><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_1_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_1_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_1_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_1_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Belum_Terpetakan_1_54.png" /></td><td>5</td></tr></table>': layer_Belum_Terpetakan_1,"OpenStreetMap": overlay_OpenStreetMap_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+	 <footer>
+        <p>© KKNP - PTLP KAB. BELU  
+            <img src="logo.jpg" alt="Logo KKNp">
+        </p>
+    </footer>
+</html>
